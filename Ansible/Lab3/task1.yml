@@ -26,6 +26,8 @@
         state: present
       when: "'second_instance' in inventory_hostname"
 
+    # Stretch Goal
+
     - name: Uninstall Unzip
       apt:
         name: unzip
