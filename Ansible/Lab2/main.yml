@@ -1,0 +1,11 @@
+---
+
+- name: Ping all hosts
+  hosts: all
+  gather_facts: no
+
+  tasks:
+    - name: Ping all hosts
+      ping:
+
+# ansible-playbook -v -i inventory/hosts main.yml

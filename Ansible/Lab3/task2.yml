@@ -1,0 +1,57 @@
+---
+
+- name: Install Nginx
+  hosts: all
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - block:
+      - name: Update Cache
+        apt: update_cache=yes cache_valid_time=3600
+
+      - name: Install Nginx
+        apt: name=nginx state=latest
+        register: nginx_install
+
+      - debug:
+          var: nginx_install
+
+      - name: Start Nginx
+        service:
+          name: nginx
+          state: started
+          enabled: yes
+
+      - name: Copy index.html
+        copy:
+          src: files/index.html
+          dest: /var/www/html/index.html
+
+      - name: Restart Nginx
+        service:
+          name: nginx
+          state: reloaded
+    
+    - block:
+      - name: Install pip3
+        apt:
+          name: python3-pip
+          state: present
+
+      - name: Pip install docker
+        pip:
+          name: docker
+          state: present
+          executable: pip3
+
+      - name: Install Docker
+        apt:
+          name: docker.io
+          state: present
+
+      - name: Enable Docker
+        service:
+          name: docker
+          state: started
+          enabled: yes

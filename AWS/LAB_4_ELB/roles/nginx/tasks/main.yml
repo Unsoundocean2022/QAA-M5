@@ -1,0 +1,7 @@
+---
+
+- include_tasks: s1.yml
+  when: inventory_hostname in groups['s1']
+
+- include_tasks: s2.yml
+  when: inventory_hostname in groups['s2']

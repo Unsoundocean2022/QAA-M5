@@ -1,0 +1,25 @@
+---
+
+- name: Update apt cache if needed.
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+
+- name: Start Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Copy index.html
+  copy:
+    src: files/index.html
+    dest: /var/www/html/index.nginx-debian.html
+
+- name: Reload Nginx
+  service:
+    name: nginx
+    state: reloaded
