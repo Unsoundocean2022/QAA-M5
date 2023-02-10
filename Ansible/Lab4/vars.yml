@@ -1,5 +1,13 @@
 ---
 
-repo_url: https://github.com/Unsoundocean2022/QAA-M5.git
+my_name: "Brad"
+
+home: "/home/ubuntu"
+
+repo_url: "https://github.com/Unsoundocean2022/QAA-M5.git"
+
+repo_name: "QAA-M5"
+
 package_var: []
-text_to_append: Aute dolore elit deserunt commodo ex aute nulla commodo sit quis Lorem voluptate deserunt exercitation.
+
+text_to_append: "Aute dolore elit deserunt commodo ex aute nulla commodo sit quis Lorem voluptate deserunt exercitation."

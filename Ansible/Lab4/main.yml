@@ -6,19 +6,16 @@
   gather_facts: no
 
   tasks:
-
     - include_vars: vars.yml
 
     - name: Print name
       debug:
         msg: "My name is {{ my_name }}"
-      vars:
-        my_name: "Brad"
 
     - name: Clone down a repo
       git:
         repo: "{{ repo_url }}"
-        dest: "/tmp/{{ repo_url.split('/')[-1].split('.')[0] }}"
+        dest: "{{ home }}/{{ repo_name }}"
 
     - name: Install specified package
       apt:
@@ -33,14 +30,14 @@
 
     - name: Create a new file and append text
       file:
-        path: "/usr/share/nginx/html/index.html"
+        path: "{{ home }}/test.txt"
         state: touch
-      lineinfile:
-        path: "/usr/share/nginx/html/index.html"
+    - lineinfile:
+        path: "{{ home }}/test.txt"
         line: "{{ text_to_append }}"
 
   handlers:
     - name: restart nginx
       service:
         name: nginx
-        state: restarted
+        state: reloaded
