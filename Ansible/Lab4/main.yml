@@ -38,7 +38,7 @@
       ansible.builtin.apt:
         name: nginx
         state: present
-      notify: restart nginx
+      notify: Restart Nginx
 
     - name: Create a new file
       ansible.builtin.file:
@@ -52,7 +52,7 @@
         line: "{{ text_to_append }}"
 
   handlers:
-    - name: restart nginx
+    - name: Restart Nginx
       ansible.builtin.service:
         name: nginx
         state: reloaded

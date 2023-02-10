@@ -16,4 +16,4 @@
     src: files/index.html
     dest: /var/www/html/index.nginx-debian.html
     mode: 0644
-  notify: restart nginx
+  notify: Restart Nginx

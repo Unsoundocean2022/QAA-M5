@@ -6,6 +6,6 @@
 
   tasks:
     - name: Ping all hosts
-      ping:
+      ansible.builtin.ping:
 
 # ansible-playbook -v -i inventory/hosts main.yml

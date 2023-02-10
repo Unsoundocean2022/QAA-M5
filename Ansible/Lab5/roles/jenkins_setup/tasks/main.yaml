@@ -38,8 +38,9 @@
     timeout: 5
 
 - name: Get Jenkins initial admin password.
-  command: "cat /var/lib/jenkins/secrets/initialAdminPassword"
+  ansible.builtin.command: "cat /var/lib/jenkins/secrets/initialAdminPassword"
   register: jenkins_initial_admin_password
+  changed_when: false
 
 - name: Print Jenkins initial admin password.
   ansible.builtin.debug:
