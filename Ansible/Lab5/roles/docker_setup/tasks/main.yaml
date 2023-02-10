@@ -13,7 +13,6 @@
   ansible.builtin.apt_repository:
     repo: "{{ docker_repo }}"
     state: present
-    filename: docker
 
 - name: Install Docker
   ansible.builtin.apt:

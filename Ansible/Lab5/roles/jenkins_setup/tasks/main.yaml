@@ -3,6 +3,7 @@
   ansible.builtin.apt:
     name: openjdk-11-jdk
     state: present
+    update_cache: true
 
 - name: Add Jenkins apt repository key.
   ansible.builtin.apt_key:
@@ -39,8 +40,8 @@
 
 - name: Get Jenkins initial admin password.
   ansible.builtin.command: "cat /var/lib/jenkins/secrets/initialAdminPassword"
-  register: jenkins_initial_admin_password
   changed_when: false
+  register: jenkins_initial_admin_password
 
 - name: Print Jenkins initial admin password.
   ansible.builtin.debug:

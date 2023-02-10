@@ -1,8 +1,6 @@
 ---
 new_group: "Devs"
-
 new_user: "Brad"
-
 packages:
   - zsh
   - curl
