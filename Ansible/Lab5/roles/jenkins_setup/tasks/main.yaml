@@ -2,26 +2,42 @@
 - name: Ensure dependencies are installed.
   apt:
     name:
-      - curl
-      - apt-transport-https
-      - gnupg
+      - wget
+      - openjdk-11-jdk
     state: present
 
 - name: Add Jenkins apt repository key.
-  ansible.builtin.get_url:
+  apt_key:
     url: "{{ jenkins_repo_key_url }}"
-    dest: /etc/apt/trusted.gpg.d/jenkins.asc
-    mode: "0644"
-    force: true
+    state: present
 
 - name: Add Jenkins apt repository.
   apt_repository:
     repo: "{{ jenkins_repo_url }}"
     state: present
-    update_cache: true
 
 - name: Ensure Jenkins is installed.
   apt:
     name: jenkins
     state: present
     update_cache: true
+
+- name: Ensure Jenkins is running.
+  service:
+    name: jenkins
+    state: started
+    enabled: true
+
+- name: Ensure Jenkins is accessible.
+  uri:
+    url: "http://localhost:8080"
+    status_code: 200
+    timeout: 5
+
+- name: Get Jenkins initial admin password.
+  shell: "cat /var/lib/jenkins/secrets/initialAdminPassword"
+  register: jenkins_initial_admin_password
+
+- name: Print Jenkins initial admin password.
+  debug:
+    msg: "Jenkins initial admin password is {{ jenkins_initial_admin_password.stdout }}"
