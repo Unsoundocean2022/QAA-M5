@@ -1,5 +1,4 @@
 ---
-
 - name: Lab 4 Playbook
   hosts: all
   become: yes
@@ -39,11 +38,13 @@
         state: present
       notify: restart nginx
 
-    - name: Create a new file and append text
+    - name: Create a new file
       file:
         path: "{{ home }}/test.txt"
         state: touch
-    - lineinfile:
+
+    - name: Append text to file
+      lineinfile:
         path: "{{ home }}/test.txt"
         line: "{{ text_to_append }}"
 

@@ -1,9 +1,9 @@
 ---
-
 - name: Run roles
   hosts: all
   gather_facts: yes
   become: yes
+
   roles:
     - developer_environment
     - docker_setup

@@ -1,5 +1,4 @@
 ---
-
 my_name: "Brad"
 
 home: "/home/ubuntu"
@@ -10,4 +9,4 @@ repo_name: "QAA-M5"
 
 package_var: []
 
-# text_to_append: "Aute dolore elit deserunt commodo ex aute nulla commodo sit quis Lorem voluptate deserunt exercitation."
+text_to_append: []
