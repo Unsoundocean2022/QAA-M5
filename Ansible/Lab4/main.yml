@@ -1,35 +1,36 @@
 ---
 
-- name: Example Playbook
+- name: Lab 4 Playbook
   hosts: all
   become: yes
   gather_facts: no
 
-  include_vars: vars.yml
-
   tasks:
+
+    - include_vars: vars.yml
+
     - name: Print name
       debug:
         msg: "My name is {{ my_name }}"
       vars:
         my_name: "Brad"
-  
+
     - name: Clone down a repo
       git:
         repo: "{{ repo_url }}"
         dest: "/tmp/{{ repo_url.split('/')[-1].split('.')[0] }}"
-  
+
     - name: Install specified package
       apt:
         name: "{{ package_var | default('unzip') }}"
         state: present
-  
+
     - name: Install nginx
       apt:
         name: nginx
         state: present
       notify: restart nginx
-  
+
     - name: Create a new file and append text
       file:
         path: "/usr/share/nginx/html/index.html"
@@ -37,7 +38,7 @@
       lineinfile:
         path: "/usr/share/nginx/html/index.html"
         line: "{{ text_to_append }}"
-  
+
   handlers:
     - name: restart nginx
       service:
