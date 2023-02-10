@@ -1,18 +1,19 @@
 ---
 - name: Install Nginx
-  apt:
+  ansible.builtin.apt:
     name: nginx
     state: present
     update_cache: true
 
 - name: Start Nginx
-  service:
+  ansible.builtin.service:
     name: nginx
     state: started
     enabled: yes
 
 - name: Replace default HTML with custom HTML
-  copy:
+  ansible.builtin.copy:
     src: files/index.html
     dest: /var/www/html/index.nginx-debian.html
+    mode: 0644
   notify: restart nginx

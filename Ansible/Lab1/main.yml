@@ -7,13 +7,17 @@
 
   tasks:
     - name: Update Cache
-      apt: update_cache=yes cache_valid_time=3600
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
 
     - name: Install Nginx
-      apt: name=nginx state=latest
+      ansible.builtin.apt:
+        name: nginx
+        state: present
 
     - name: Start Nginx
-      service:
+      ansible.builtin.service:
         name: nginx
         state: started
         enabled: yes
@@ -21,4 +25,6 @@
     # Stretch Goal
 
     - name: Install Unzip
-      apt: name=unzip state=latest
+      ansible.builtin.apt:
+        name: unzip
+        state: present

@@ -1,5 +1,4 @@
 ---
-
 - name: Install Nginx
   hosts: all
   become: yes
@@ -7,49 +6,55 @@
 
   tasks:
     - name: Update Cache
-      apt: update_cache=yes cache_valid_time=3600
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
 
     - name: Install Nginx
-      apt: name=nginx state=latest
+      ansible.builtin.apt:
+        name: nginx
+        state: present
       register: nginx_install
 
-    - debug:
+    - name: Print Nginx Install
+      ansible.builtin.debug:
         var: nginx_install
 
     - name: Start Nginx
-      service:
+      ansible.builtin.service:
         name: nginx
         state: started
         enabled: yes
 
     - name: Copy index.html
-      copy:
+      ansible.builtin.copy:
         src: files/index.html
         dest: /var/www/html/index.html
+        mode: 0644
 
     - name: Restart Nginx
-      service:
+      ansible.builtin.service:
         name: nginx
         state: reloaded
 
     - name: Install pip3
-      apt:
+      ansible.builtin.apt:
         name: python3-pip
         state: present
 
     - name: Pip install docker
-      pip:
+      ansible.builtin.pip:
         name: docker
         state: present
         executable: pip3
 
     - name: Install Docker
-      apt:
+      ansible.builtin.apt:
         name: docker.io
         state: present
 
     - name: Enable Docker
-      service:
+      ansible.builtin.service:
         name: docker
         state: started
         enabled: yes

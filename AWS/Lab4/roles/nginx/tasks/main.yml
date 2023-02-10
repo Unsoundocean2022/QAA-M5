@@ -1,7 +1,9 @@
 ---
 
-- include_tasks: s1.yml
+- name: Install nginx on s1
+  ansible.builtin.include_tasks: s1.yml
   when: inventory_hostname in groups['s1']
 
-- include_tasks: s2.yml
+- name: Install nginx on s2
+  ansible.builtin.include_tasks: s2.yml
   when: inventory_hostname in groups['s2']

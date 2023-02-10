@@ -7,28 +7,30 @@
 
   tasks:
     - name: Update Cache
-      apt: update_cache=yes cache_valid_time=3600
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
 
     - name: Install wget
-      apt:
+      ansible.builtin.apt:
         name: wget
         state: present
 
     - name: Install unzip on the first instance
-      apt:
+      ansible.builtin.apt:
         name: unzip
         state: present
-      when: "'first_instance' in inventory_hostname"
+      when: "'instance1' in inventory_hostname"
 
     - name: Install nginx on the second instance
-      apt:
+      ansible.builtin.apt:
         name: nginx
         state: present
-      when: "'second_instance' in inventory_hostname"
+      when: "'instance2' in inventory_hostname"
 
     # Stretch Goal
 
     - name: Uninstall Unzip
-      apt:
+      ansible.builtin.apt:
         name: unzip
         state: absent
