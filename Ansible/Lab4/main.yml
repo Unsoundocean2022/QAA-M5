@@ -28,6 +28,7 @@
       ansible.builtin.git:
         repo: "{{ repo_url }}"
         dest: "{{ home }}/{{ repo_name }}"
+        version: "{{ repo_version }}"
 
     - name: Install specified package
       ansible.builtin.apt:

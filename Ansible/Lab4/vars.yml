@@ -7,6 +7,8 @@ repo_url: "https://github.com/Unsoundocean2022/QAA-M5.git"
 
 repo_name: "QAA-M5"
 
+repo_version: "main"
+
 package_var: []
 
 text_to_append: []
