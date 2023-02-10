@@ -12,8 +12,6 @@
 
 - name: Install zsh and curl
   package:
-    name:
-      - zsh
-      - curl
+    name: "{{ packages }}"
     state: present
     update_cache: true

@@ -1,9 +1,7 @@
 ---
 - name: Ensure dependencies are installed.
-  apt:
-    name:
-      - wget
-      - openjdk-11-jdk
+  package:
+    name: openjdk-11-jdk
     state: present
 
 - name: Add Jenkins apt repository key.
@@ -28,9 +26,14 @@
     state: started
     enabled: true
 
+- name: Wait for Jenkins to start.
+  wait_for:
+    port: 8080
+    timeout: 60
+
 - name: Ensure Jenkins is accessible.
   uri:
-    url: "http://localhost:8080"
+    url: "http://{{ ansible_host }}:8080/login?from=%2F"
     status_code: 200
     timeout: 5
 

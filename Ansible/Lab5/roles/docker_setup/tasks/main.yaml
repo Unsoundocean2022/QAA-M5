@@ -2,32 +2,24 @@
 
 - name: Install apt-transport-https
   apt:
-    name:
-      - apt-transport-https
-      - ca-certificates
-      - lsb-release
-      - gnupg
-    state: latest
+    name: "{{ docker_dependencies }}"
+    state: present
 
 - name: Add signing key
   apt_key:
-    url: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+    url: "{{ docker_key_url }}"
     state: present
 
 - name: Add repository into sources list
   apt_repository:
-    repo: "deb [arch={{ ansible_architecture }}] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} stable"
+    repo: "{{ docker_repo }}"
     state: present
     filename: docker
 
 - name: Install Docker
   apt:
-    name:
-      - docker
-      - docker.io
-      - docker-compose
-      - docker-registry
-    state: latest
+    name: "{{ docker_packages }}"
+    state: present
     update_cache: true
 
 - name: Start Docker
