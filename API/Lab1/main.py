@@ -10,9 +10,9 @@ def hello_internet():
 
 # Return name from variable
 
-@app.route('/name/<name>')
-def hello_name(name):
-    return "Hello {}!".format(name)
+@app.route('/greet/string:<name:person_name>')
+def greet(person_name):
+    return "Hello {}!".format(person_name)
 
 if __name__=='__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
